@@ -23,6 +23,17 @@ export class Message extends Component {
 
     return this.state.showSpan ? <span>{div}</span> : div;
   }
+  componentDidMount() {
+    console.log("componentDidMount Message Component");
+  }
+
+  componentDidUpdate() {
+    console.log("componentDidUpdate Message Component");
+  }
+
+  componentWillUnmount() {
+    console.log("componentWillUnmount Message Component");
+  }
 
   render() {
     console.log(`Render Message Component`);
@@ -36,5 +47,15 @@ export class Message extends Component {
         {this.getMessageElement()}
       </div>
     );
+  }
+
+  shouldComponentUpdate(newProps, newState) {
+    let change = newProps.message != this.props.message;
+    if (change) {
+      console.log(`shouldComponentUpdate ${this.props.text}: Update Allowed`);
+    } else {
+      console.log(`shouldComponentUpdate ${this.props.text}: Update Prevented`);
+    }
+    return change;
   }
 }
